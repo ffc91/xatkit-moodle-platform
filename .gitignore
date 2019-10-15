@@ -3,5 +3,8 @@ runtime/target/
 
 # Files
 .project
+.classpath
 platform/.project
+platform/.classpath
 runtime/.project
+platform/.classpath
