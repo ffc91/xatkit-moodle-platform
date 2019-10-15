@@ -1,5 +1,7 @@
 # Folders
 runtime/target/
+platform/.settings/
+runtime/.settings/
 
 # Files
 .project
@@ -7,4 +9,5 @@ runtime/target/
 platform/.project
 platform/.classpath
 runtime/.project
-platform/.classpath
+runtime/.classpath
+
