@@ -1,1 +1,7 @@
+# Folders
 runtime/target/
+
+# Files
+.project
+platform/.project
+runtime/.project
