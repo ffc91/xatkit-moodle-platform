@@ -12,16 +12,16 @@ public interface MoodleUtils extends ChatUtils {
      * The {@link org.apache.commons.configuration2.Configuration} key to store the port of the
      * {@link com.xatkit.plugins.react.platform.ReactPlatform}'s socket server.
      */
-    String REACT_SERVER_PORT_KEY = "xatkit.react.port";
+    String MOODLE_SERVER_PORT_KEY = "xatkit.moodle.port";
 
     /**
      * The default value of the {@link #REACT_SERVER_PORT_KEY}
      * {@link org.apache.commons.configuration2.Configuration} key.
      */
-    int DEFAULT_REACT_SERVER_PORT = 5001;
+    int DEFAULT_MOODLE_SERVER_PORT = 5001;
 
     /**
      * The {@link RuntimeContexts} key used to store React-related information.
      */
-    String REACT_CONTEXT_KEY = "react";
+    String MOODLE_CONTEXT_KEY = "moodle";
 }

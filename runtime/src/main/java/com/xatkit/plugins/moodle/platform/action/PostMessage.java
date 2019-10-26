@@ -2,9 +2,9 @@ package com.xatkit.plugins.moodle.platform.action;
 
 import com.xatkit.core.platform.action.RuntimeMessageAction;
 import com.xatkit.core.session.XatkitSession;
-import com.xatkit.plugins.moodle.platform.utils.platform.MoodlePlatform;
-import com.xatkit.plugins.moodle.platform.utils.platform.utils.MessageObject;
-import com.xatkit.plugins.moodle.platform.utils.platform.utils.SocketEventTypes;
+import com.xatkit.plugins.moodle.platform.MoodlePlatform;
+import com.xatkit.plugins.moodle.platform.utils.MessageObject;
+import com.xatkit.plugins.moodle.platform.utils.SocketEventTypes;
 
 import java.util.UUID;
 
@@ -14,7 +14,7 @@ import static java.util.Objects.nonNull;
 /**
  * A {@link RuntimeMessageAction} that posts a {@code message} to a given xatkit-react {@code channel}.
  */
-public class PostMessage extends RuntimeMessageAction<ReactPlatform> {
+public class PostMessage extends RuntimeMessageAction<MoodlePlatform> {
 
     /**
      * The channel to post the message to.
@@ -32,7 +32,7 @@ public class PostMessage extends RuntimeMessageAction<ReactPlatform> {
      * @throws NullPointerException     if the provided {@code runtimePlatform} or {@code session} is {@code null}
      * @throws IllegalArgumentException if the provided {@code message} or {@code channel} is {@code null}
      */
-    public PostMessage(ReactPlatform runtimePlatform, XatkitSession session, String message, String channel) {
+    public PostMessage(MoodlePlatform runtimePlatform, XatkitSession session, String message, String channel) {
         super(runtimePlatform, session, message);
         checkArgument(nonNull(channel) && !(channel.isEmpty()), "Cannot construct a %s action with the provided " +
                 "channel %s, expected a non-null and not empty String", this.getClass().getSimpleName(), channel);

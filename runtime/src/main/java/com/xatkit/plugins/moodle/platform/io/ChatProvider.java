@@ -1,6 +1,6 @@
 package com.xatkit.plugins.moodle.platform.io;
 
-import com.xatkit.plugins.moodle.platform.ReactPlatform;
+import com.xatkit.plugins.moodle.platform.MoodlePlatform;
 import org.apache.commons.configuration2.Configuration;
 
 /**
@@ -19,7 +19,7 @@ public class ChatProvider extends MoodleIntentProvider {
      * @param runtimePlatform the {@link ReactPlatform} containing this {@link ChatProvider}
      * @param configuration   the {@link Configuration} used to initialize the {@link ReactPlatform}
      */
-    public ChatProvider(ReactPlatform runtimePlatform, Configuration configuration) {
+    public ChatProvider(MoodlePlatform runtimePlatform, Configuration configuration) {
         super(runtimePlatform, configuration);
     }
 }

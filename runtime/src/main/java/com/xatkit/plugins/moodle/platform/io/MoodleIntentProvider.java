@@ -5,10 +5,10 @@ import com.xatkit.core.session.XatkitSession;
 import com.xatkit.intent.RecognizedIntent;
 import com.xatkit.plugins.chat.ChatUtils;
 import com.xatkit.plugins.chat.platform.io.ChatIntentProvider;
-import com.xatkit.plugins.moodle.platform.ReactPlatform;
-import com.xatkit.plugins.moodle.platform.utils.platform.utils.MessageObject;
-import com.xatkit.plugins.moodle.platform.utils.platform.utils.ReactUtils;
-import com.xatkit.plugins.moodle.platform.utils.platform.utils.SocketEventTypes;
+import com.xatkit.plugins.moodle.platform.MoodlePlatform;
+import com.xatkit.plugins.moodle.platform.utils.MessageObject;
+import com.xatkit.plugins.moodle.platform.utils.MoodleUtils;
+import com.xatkit.plugins.moodle.platform.utils.SocketEventTypes;
 
 import fr.inria.atlanmod.commons.log.Log;
 import org.apache.commons.configuration2.Configuration;
@@ -29,7 +29,7 @@ public class MoodleIntentProvider extends ChatIntentProvider<MoodlePlatform> {
      * @param configuration   the platform's {@link Configuration}
      * @see IntentRecognitionHelper
      */
-    public ReactIntentProvider(ReactPlatform runtimePlatform, Configuration configuration) {
+    public MoodleIntentProvider(MoodlePlatform runtimePlatform, Configuration configuration) {
         super(runtimePlatform, configuration);
         this.runtimePlatform.getSocketIOServer().addEventListener(SocketEventTypes.USER_MESSAGE.label,
                 MessageObject.class, (socketIOClient, messageObject, ackRequest) -> {
@@ -41,12 +41,12 @@ public class MoodleIntentProvider extends ChatIntentProvider<MoodlePlatform> {
                     XatkitSession session = this.getRuntimePlatform().createSessionFromChannel(channel);
                     RecognizedIntent recognizedIntent = IntentRecognitionHelper.getRecognizedIntent(rawMessage,
                             session, this.getRuntimePlatform().getXatkitCore());
-                    session.getRuntimeContexts().setContextValue(ReactUtils.REACT_CONTEXT_KEY, 1,
-                            ReactUtils.CHAT_USERNAME_CONTEXT_KEY, username);
-                    session.getRuntimeContexts().setContextValue(ReactUtils.REACT_CONTEXT_KEY, 1,
-                            ReactUtils.CHAT_CHANNEL_CONTEXT_KEY, channel);
-                    session.getRuntimeContexts().setContextValue(ReactUtils.REACT_CONTEXT_KEY, 1,
-                            ReactUtils.CHAT_RAW_MESSAGE_CONTEXT_KEY, rawMessage);
+                    session.getRuntimeContexts().setContextValue(MoodleUtils.MOODLE_CONTEXT_KEY, 1,
+                            MoodleUtils.CHAT_USERNAME_CONTEXT_KEY, username);
+                    session.getRuntimeContexts().setContextValue(MoodleUtils.MOODLE_CONTEXT_KEY, 1,
+                            MoodleUtils.CHAT_CHANNEL_CONTEXT_KEY, channel);
+                    session.getRuntimeContexts().setContextValue(MoodleUtils.MOODLE_CONTEXT_KEY, 1,
+                            MoodleUtils.CHAT_RAW_MESSAGE_CONTEXT_KEY, rawMessage);
                     /*
                      * This provider extends ChatIntentProvider, and must set chat-related context values.
                      */

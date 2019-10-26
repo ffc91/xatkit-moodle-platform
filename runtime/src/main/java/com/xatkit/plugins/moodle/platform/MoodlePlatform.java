@@ -1,15 +1,16 @@
 package com.xatkit.plugins.moodle.platform;
 
-import java.lang.module.Configuration;
-
 import com.corundumstudio.socketio.SocketIOServer;
 import com.xatkit.core.XatkitCore;
 import com.xatkit.core.server.XatkitServerUtils;
 import com.xatkit.core.session.XatkitSession;
 import com.xatkit.plugins.chat.platform.ChatPlatform;
 import com.xatkit.plugins.moodle.platform.action.PostMessage;
+import com.xatkit.plugins.moodle.platform.utils.MoodleUtils;
 
 import fr.inria.atlanmod.commons.log.Log;
+import org.apache.commons.configuration2.Configuration;
+
 
 /**
  * A {@link ChatPlatform} class that interacts with the
@@ -44,10 +45,10 @@ public class MoodlePlatform extends ChatPlatform {
      * @param configuration the platform's {@link Configuration} containing the port of the socket server
      * @throws NullPointerException if the provided {@code xatkitCore} or {@code configuration} is {@code null}
      */
-    public ReactPlatform(XatkitCore xatkitCore, Configuration configuration) {
+    public MoodlePlatform(XatkitCore xatkitCore, Configuration configuration) {
         super(xatkitCore, configuration);
-        int socketServerPort = configuration.getInt(ReactUtils.REACT_SERVER_PORT_KEY,
-                ReactUtils.DEFAULT_REACT_SERVER_PORT);
+        int socketServerPort = configuration.getInt(MoodleUtils.MOODLE_SERVER_PORT_KEY,
+                MoodleUtils.DEFAULT_MOODLE_SERVER_PORT);
         String originLocation = configuration.getString(XatkitServerUtils.SERVER_PUBLIC_URL_KEY,
                 XatkitServerUtils.DEFAULT_SERVER_LOCATION);
         int originPort = configuration.getInt(XatkitServerUtils.SERVER_PORT_KEY,
