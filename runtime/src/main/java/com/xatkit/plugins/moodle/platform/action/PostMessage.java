@@ -28,7 +28,7 @@ public class PostMessage extends RestGetAction<MoodlePlatform> {
      * @throws NullPointerException     if the provided {@code runtimePlatform} or {@code session} is {@code null}
      * @throws IllegalArgumentException if the provided {@code message} or {@code channel} is {@code null}
      */
-    public PostMessage(MoodlePlatform runtimePlatform, XatkitSession session, Map<String, String> headers, String moodleEndpoint,Map<String, Object> params) {
+    public PostMessage(MoodlePlatform runtimePlatform, XatkitSession session, String moodleEndpoint,Map<String, Object> params) {
         super(runtimePlatform, session, Collections.emptyMap(), moodleEndpoint, params);
     }
 
