@@ -29,7 +29,7 @@ public class PostMessage extends RestGetAction<MoodlePlatform> {
      * @throws IllegalArgumentException if the provided {@code message} or {@code channel} is {@code null}
      */
     public PostMessage(MoodlePlatform runtimePlatform, XatkitSession session, String moodleEndpoint,Map<String, Object> params) {
-        super(runtimePlatform, session, Collections.emptyMap(), moodleEndpoint, params);
+        super(runtimePlatform, session, Collections.emptyMap(), moodleEndpoint + "&wsfunction=core_message_send_instant_messages", params);
     }
 
 
