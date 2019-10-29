@@ -1,0 +1,13 @@
+import library "GreetingsBotMoodle/GreetingsBot-Lib.xmi"
+import library "CoreLibrary"
+import platform "SlackPlatform"
+import library "CoreLibrary"
+import platform "MoodlePlatform"
+
+use provider SlackPlatform.SlackIntentProvider
+
+on intent Welcome do
+	action SlackPlatform.Reply(message : "Hi, nice to meet you!")
+
+on intent Default_Fallback_Intent do
+	action MoodlePlatform.PostMessage(restApiEndpoint : config(xatkit.moodle.restApiEndpoint) + config(xatkit.moodle.accessToken), params : "")

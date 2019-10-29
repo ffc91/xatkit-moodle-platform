@@ -1,0 +1,11 @@
+Library GreetingsBotLibrary
+
+intent Welcome {
+	inputs {
+		"Hi"
+		"Hello"
+		"Good morning"
+		"Good afternoon"
+	}
+}
+
