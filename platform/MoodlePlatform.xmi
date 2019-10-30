@@ -17,7 +17,8 @@
   </eventProviderDefinitions>
   <actions name="PostMessage">
     <parameters key="restApiEndpoint"/>
-    <parameters key="params"/>
+    <parameters key="toUserId"/>
+    <parameters key="message"/>
   </actions>
   <actions name="PostMessage">
     <parameters key="message"/>

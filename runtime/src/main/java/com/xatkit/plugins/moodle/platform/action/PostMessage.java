@@ -7,7 +7,7 @@ import com.xatkit.core.session.XatkitSession;
 import com.xatkit.plugins.moodle.platform.MoodlePlatform;
 
 import java.util.Collections;
-import java.util.Map;
+import java.util.HashMap;
 
 
 import java.io.BufferedReader;
@@ -28,8 +28,12 @@ public class PostMessage extends RestGetAction<MoodlePlatform> {
      * @throws NullPointerException     if the provided {@code runtimePlatform} or {@code session} is {@code null}
      * @throws IllegalArgumentException if the provided {@code message} or {@code channel} is {@code null}
      */
-    public PostMessage(MoodlePlatform runtimePlatform, XatkitSession session, String moodleEndpoint,Map<String, Object> params) {
-        super(runtimePlatform, session, Collections.emptyMap(), moodleEndpoint + "&wsfunction=core_message_send_instant_messages", params);
+    public PostMessage(MoodlePlatform runtimePlatform, XatkitSession session, String moodleEndpoint, String toUserId, String message) {
+        super(runtimePlatform, session, Collections.emptyMap(), moodleEndpoint + "&wsfunction=core_message_send_instant_messages", 
+                new HashMap<String,Object>() {{
+                    put("messages[0][touserid]", Integer.valueOf(toUserId));
+                    put("messages[0][text]", message);  
+                }});
     }
 
 

@@ -15,5 +15,5 @@ providers {
 }
 
 actions {
-	PostMessage(restApiEndpoint, params)
+	PostMessage(restApiEndpoint, toUserId, message)
 }
