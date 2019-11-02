@@ -1,5 +1,6 @@
 # Folders
 runtime/target/
+platform/target/
 platform/.settings/
 runtime/.settings/
 
@@ -10,4 +11,6 @@ platform/.project
 platform/.classpath
 runtime/.project
 runtime/.classpath
-
+runtime/bin/
+examples/GreetingsBotMoodle/*.json
+examples/GreetingsBotMoodle/*.properties
