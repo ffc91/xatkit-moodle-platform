@@ -4,7 +4,7 @@ import com.xatkit.core.session.RuntimeContexts;
 import com.xatkit.plugins.chat.ChatUtils;
 
 /**
- * An utility interface that holds xatkit-react related helpers and context keys.
+ * An utility interface that holds xatkit-moodle related helpers and context keys.
  */
 public interface MoodleUtils extends ChatUtils {
 
@@ -36,7 +36,7 @@ public interface MoodleUtils extends ChatUtils {
     int DEFAULT_MOODLE_SERVER_PORT = 5002;
 
     /**
-     * The {@link RuntimeContexts} key used to store React-related information.
+     * The {@link RuntimeContexts} key used to store Moodle-related information.
      */
     String MOODLE_CONTEXT_KEY = "moodle";
 }

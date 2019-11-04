@@ -16,7 +16,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- * A {@link RuntimeMessageAction} that posts a {@code message} to a given xatkit-react {@code channel}.
+ * A {@link RuntimeMessageAction} that posts a {@code message} to a given xatkit-moodle {@code channel}.
  */
 public class PostMessage extends RestGetAction<MoodlePlatform> {
 

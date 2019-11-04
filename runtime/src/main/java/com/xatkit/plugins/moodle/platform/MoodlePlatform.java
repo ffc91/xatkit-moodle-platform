@@ -11,7 +11,6 @@ import com.xatkit.plugins.moodle.platform.utils.MoodleUtils;
 import fr.inria.atlanmod.commons.log.Log;
 import org.apache.commons.configuration2.Configuration;
 
-
 /**
  * A {@link ChatPlatform} class that interacts with the
  * <a href="https://github.com/xatkit-bot-platform/xatkit-react">Xatkit React component</a>.
@@ -72,8 +71,8 @@ public class MoodlePlatform extends ChatPlatform {
          */
         socketioConfiguration.setRandomSession(true);
         socketIOServer = new SocketIOServer(socketioConfiguration);
-        socketIOServer.addConnectListener(socketIOClient -> Log.info("Connected"));
-        socketIOServer.addDisconnectListener(socketIOClient -> Log.info("Disconnected"));
+        socketIOServer.addConnectListener(socketIOClient -> Log.info("Moodle Connected"));
+        socketIOServer.addDisconnectListener(socketIOClient -> Log.info("Moodle Disconnected"));
         this.socketIOServer.startAsync();
     }
 

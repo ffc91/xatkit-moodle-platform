@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <execution:ExecutionModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:common="com.xatkit.common" xmlns:execution="com.xatkit.execution">
-  <eventProviderDefinitions href="pathmap://XATKIT_CORE_PLATFORM/SlackPlatform.xmi#//@eventProviderDefinitions.0"/>
-  <executionRules>
-    <event href="file:/D:/Users/nicoerlichman/Documents/2-Code_Repos/XATKIT/xatkit-dev/src/platforms/xatkit-moodle-platform/examples/GreetingsBotMoodle/GreetingsBot-Lib.xmi#//@eventDefinitions.0"/>
-    <instructions xsi:type="execution:ActionInstance">
-      <action href="pathmap://XATKIT_CORE_PLATFORM/SlackPlatform.xmi#//@actions.16"/>
-      <values>
-        <parameter href="pathmap://XATKIT_CORE_PLATFORM/SlackPlatform.xmi#//@actions.16/@parameters.0"/>
-        <expression xsi:type="common:StringLiteral" value="Hi, nice to meet you!"/>
-      </values>
-    </instructions>
-  </executionRules>
+  <eventProviderDefinitions href="pathmap://XATKIT_CORE_PLATFORM/MoodlePlatform.xmi#//@eventProviderDefinitions.0"/>
   <executionRules>
     <event href="pathmap://XATKIT_CORE_LIBRARY/CoreLibrary.xmi#//@eventDefinitions.0"/>
     <instructions xsi:type="execution:ActionInstance">
@@ -19,7 +9,10 @@
         <parameter href="pathmap://XATKIT_CORE_PLATFORM/MoodlePlatform.xmi#//@actions.0/@parameters.0"/>
         <expression xsi:type="common:OperationCall" name="+">
           <source xsi:type="common:ConfigAccess" keyName="xatkit.moodle.restApiEndpoint"/>
-          <args xsi:type="common:ConfigAccess" keyName="xatkit.moodle.accessToken"/>
+          <args xsi:type="common:OperationCall" name="+">
+            <source xsi:type="common:StringLiteral" value="?wstoken="/>
+            <args xsi:type="common:ConfigAccess" keyName="xatkit.moodle.accessToken"/>
+          </args>
         </expression>
       </values>
       <values>
@@ -34,7 +27,6 @@
   </executionRules>
   <imports xsi:type="common:LibraryImportDeclaration" path="GreetingsBotMoodle/GreetingsBot-Lib.xmi"/>
   <imports xsi:type="common:LibraryImportDeclaration" path="CoreLibrary"/>
-  <imports xsi:type="common:PlatformImportDeclaration" path="SlackPlatform"/>
   <imports xsi:type="common:LibraryImportDeclaration" path="CoreLibrary"/>
   <imports xsi:type="common:PlatformImportDeclaration" path="MoodlePlatform"/>
 </execution:ExecutionModel>

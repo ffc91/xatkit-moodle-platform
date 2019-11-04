@@ -5,7 +5,7 @@ xatkit.execution.model = GreetingsBot-Ex.xmi
 xatkit.libraries.custom.GreetingsBotLib = GreetingsBot-Lib.xmi
 
 # Set a concrete platform to use in place of the ChatPlatform
-xatkit.platforms.abstract.ChatPlatform = com.xatkit.plugins.slack.platform.SlackPlatform
+xatkit.platforms.abstract.ChatPlatform = com.xatkit.plugins.moodle.platform.MoodlePlatform
 
 # Slack configuration
 xatkit.slack.token = <Your Slack Token>

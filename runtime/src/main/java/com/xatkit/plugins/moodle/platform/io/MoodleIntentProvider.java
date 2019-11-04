@@ -20,17 +20,20 @@ import org.apache.commons.configuration2.Configuration;
 public class MoodleIntentProvider extends ChatIntentProvider<MoodlePlatform> {
 
     /**
-     * Constructs a {@link ReactIntentProvider} from the provided {@code runtimePlatform} and {@code configuration}.
+     * Constructs a {@link MoodleIntentProvider} from the provided {@code runtimePlatform} and {@code configuration}.
      * <p>
      * This constructor registers a dedicated listener to the socket server that receives user messages and
      * translates them into {@link RecognizedIntent}s using the {@link IntentRecognitionHelper}.
      *
-     * @param runtimePlatform the {@link ReactPlatform} containing this provider
+     * @param runtimePlatform the {@link MoodlePlatform} containing this provider
      * @param configuration   the platform's {@link Configuration}
      * @see IntentRecognitionHelper
      */
     public MoodleIntentProvider(MoodlePlatform runtimePlatform, Configuration configuration) {
         super(runtimePlatform, configuration);
+        this.runtimePlatform.getSocketIOServer().addEventListener(SocketEventTypes.BOT_MESSAGE.label, Object.class, (socketIOClient, messageObject, ackRequest)-> {
+            Log.info("Received message {0}", messageObject.toString());});
+        
         this.runtimePlatform.getSocketIOServer().addEventListener(SocketEventTypes.USER_MESSAGE.label,
                 MessageObject.class, (socketIOClient, messageObject, ackRequest) -> {
                     Log.info("Received message {0}", messageObject.getMessage());
