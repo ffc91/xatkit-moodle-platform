@@ -3,6 +3,8 @@ runtime/target/
 platform/target/
 platform/.settings/
 runtime/.settings/
+examples/GreetingsBotMoodle/data/
+examples/GreetingsBotMoodle/public/
 
 # Files
 .project
