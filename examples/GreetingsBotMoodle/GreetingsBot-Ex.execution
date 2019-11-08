@@ -6,4 +6,4 @@ import platform "MoodlePlatform"
 use provider MoodlePlatform.MoodleIntentProvider
 
 on intent Default_Fallback_Intent do
-	action MoodlePlatform.PostMessage(restApiEndpoint : config(xatkit.moodle.restApiEndpoint) + "?wstoken=" + config(xatkit.moodle.accessToken), toUserId : "1", message : "PRUEBA_BOT")
+	action MoodlePlatform.PostMessage(restApiEndpoint : config(xatkit.moodle.restApiEndpoint) + "?wstoken=" + config(xatkit.moodle.accessToken), toUserId : context(moodle).get("username"), message : "Mensaje recibido: " + context(moodle).get("rawMessage"))
