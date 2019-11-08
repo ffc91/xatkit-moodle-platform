@@ -17,11 +17,20 @@
       </values>
       <values>
         <parameter href="pathmap://XATKIT_CORE_PLATFORM/MoodlePlatform.xmi#//@actions.0/@parameters.1"/>
-        <expression xsi:type="common:StringLiteral" value="1"/>
+        <expression xsi:type="common:OperationCall" name="get">
+          <source xsi:type="common:ContextAccess" contextName="moodle"/>
+          <args xsi:type="common:StringLiteral" value="username"/>
+        </expression>
       </values>
       <values>
         <parameter href="pathmap://XATKIT_CORE_PLATFORM/MoodlePlatform.xmi#//@actions.0/@parameters.2"/>
-        <expression xsi:type="common:StringLiteral" value="PRUEBA_BOT"/>
+        <expression xsi:type="common:OperationCall" name="+">
+          <source xsi:type="common:StringLiteral" value="Mensaje recibido: "/>
+          <args xsi:type="common:OperationCall" name="get">
+            <source xsi:type="common:ContextAccess" contextName="moodle"/>
+            <args xsi:type="common:StringLiteral" value="rawMessage"/>
+          </args>
+        </expression>
       </values>
     </instructions>
   </executionRules>
