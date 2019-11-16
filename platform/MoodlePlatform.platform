@@ -15,5 +15,6 @@ providers {
 }
 
 actions {
-	PostMessage(restApiEndpoint, toUserId, message)
+	PostMessage(restApiEndpoint	: String, toUserId : Integer, message : String)
+	Reply(message : String)
 }
