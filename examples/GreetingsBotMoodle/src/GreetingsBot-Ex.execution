@@ -1,0 +1,8 @@
+import library "GreetingsBotMoodle/src/GreetingsBot-Lib.intent" as GreetingsBotLib
+import library "CoreLibrary"
+import platform "MoodlePlatform"
+
+use provider MoodlePlatform.MoodleIntentProvider
+
+on intent Default_Fallback_Intent do
+	MoodlePlatform.PostMessage((config.get("xatkit.moodle.restApiEndpoint") as String) + "?wstoken=" + (config.get("xatkit.moodle.accessToken") as String), Integer.parseInt(context.get("moodle").get("username") as String), "Mensaje recibido: " + (context.get("moodle").get("rawMessage") as String))

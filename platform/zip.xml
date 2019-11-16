@@ -9,9 +9,6 @@
     </formats>
     <files>
         <file>
-            <source>MoodlePlatform.xmi</source>
-        </file>
-        <file>
             <source>MoodlePlatform.platform</source>
         </file>
     </files>

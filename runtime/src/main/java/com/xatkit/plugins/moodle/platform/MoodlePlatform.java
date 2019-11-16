@@ -100,9 +100,9 @@ public class MoodlePlatform extends ChatPlatform {
      *
      * @param channel the channel to create a {@link XatkitSession} from
      * @return the created {@link XatkitSession}
-     */
+    */
     public XatkitSession createSessionFromChannel(String channel) {
         return this.xatkitCore.getOrCreateXatkitSession(channel);
     }
-
+   
 }

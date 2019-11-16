@@ -1,18 +1,59 @@
+# Intellij files
+.idea
+*.iml
+
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# maven
+target
+**/*.versionsBackup
+
+# Eclipse
+.settings
+
+# xatkit data
+**/data
+
+# xatkit logs
+**/logs
+
+# Deployment files with credentials
+*-private.properties
+
+# Bin scripts
+bin
+
+platform/*.xmi
+
 # Folders
 runtime/target/
 platform/target/
-platform/.settings/
-runtime/.settings/
 examples/GreetingsBotMoodle/data/
 examples/GreetingsBotMoodle/public/
 
-# Files
-.project
-.classpath
-platform/.project
-platform/.classpath
-runtime/.project
-runtime/.classpath
+# Other Files
 runtime/bin/
 examples/GreetingsBotMoodle/*.json
 examples/GreetingsBotMoodle/*.properties
