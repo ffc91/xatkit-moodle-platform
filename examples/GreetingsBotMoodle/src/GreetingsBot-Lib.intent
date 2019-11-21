@@ -1,11 +1,34 @@
 Library GreetingsBotLibrary
 
-intent Welcome {
+intent MyCourses{
 	inputs {
-		"Hi"
-		"Hello"
-		"Good morning"
-		"Good afternoon"
+		"Which are my courses"
+		"Can you tell me wich are my courses"
+		"What courses am I enrolled"
+		"My courses"
 	}
 }
 
+intent Agent_Boring{
+	inputs {
+		"you are boring me"
+		"you are very boring"
+		"you're so boring"
+		"you are boring"
+		"you're incredibly boring"
+		"you're really boring"
+		"how boring you are"
+	}
+}
+
+intent Agent_Boss{
+	inputs {
+		"who is your master"
+		"who do you work for"
+		"I should be your boss"
+		"who is your owner"
+		"who is your boss"
+		"who is the boss"
+		"who do you think is your boss"
+	}
+}
