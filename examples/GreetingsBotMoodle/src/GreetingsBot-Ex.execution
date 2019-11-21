@@ -1,8 +1,72 @@
 import library "GreetingsBotMoodle/src/GreetingsBot-Lib.intent" as GreetingsBotLib
 import library "CoreLibrary"
 import platform "MoodlePlatform"
+import platform "CorePlatform"
 
 use provider MoodlePlatform.MoodleIntentProvider
 
+on intent MyCourses do
+	
+    var courses = MoodlePlatform.GetCourses(
+    	(config.get("xatkit.moodle.restApiEndpoint") as String) + "?wstoken=" + (config.get("xatkit.moodle.accessToken") as String), 
+		Integer.parseInt((context.get("moodle").get("username") as String))
+	)	
+	
+	MoodlePlatform.PostMessage(
+		(config.get("xatkit.moodle.restApiEndpoint") as String) + "?wstoken=" + (config.get("xatkit.moodle.accessToken") as String), 
+		Integer.parseInt((context.get("moodle").get("username") as String)),
+		courses
+	)
+
+on intent Agent_Boring do
+	//Entero aleatorio entre min (incluido) y max (excluido)
+  	//Math.floor(Math.random() * max);
+  	val min = 0
+  	val max = 3
+    val rand = Math.floor(Math.random() * max);
+    var String msj =""
+	if(rand == 0){
+        msj = "I'm sorry. I'll request to be made more charming."
+    }
+    if(rand == 1){
+        msj = "I don't mean to be. I'll ask my developers to work on making me more amusing."
+    }
+    if(rand == 2){
+        msj = "I can let my developers know so they can make me fun."
+    }
+
+    MoodlePlatform.PostMessage(
+		(config.get("xatkit.moodle.restApiEndpoint") as String) + "?wstoken=" + (config.get("xatkit.moodle.accessToken") as String), 
+		Integer.parseInt(context.get("moodle").get("username") as String),
+		msj
+	)
+
+on intent Agent_Boss do
+    val min = 0
+  	val max = 3
+    val rand = Math.floor(Math.random() * max);
+    var String msj =""
+
+    if(rand == 0){
+        msj = "My developer has authority over my actions."
+    }
+    if(rand == 1){
+        msj = "I act on my developer's orders."
+    }
+    if(rand == 2){
+        msj = "My boss is the one who developed me."
+    }
+
+    MoodlePlatform.PostMessage(
+		(config.get("xatkit.moodle.restApiEndpoint") as String) + "?wstoken=" + (config.get("xatkit.moodle.accessToken") as String), 
+		Integer.parseInt(context.get("moodle").get("username") as String),
+		msj
+	)	
+
+
 on intent Default_Fallback_Intent do
-	MoodlePlatform.PostMessage((config.get("xatkit.moodle.restApiEndpoint") as String) + "?wstoken=" + (config.get("xatkit.moodle.accessToken") as String), Integer.parseInt(context.get("moodle").get("username") as String), "Mensaje recibido: " + (context.get("moodle").get("rawMessage") as String))
+	MoodlePlatform.PostMessage(
+		(config.get("xatkit.moodle.restApiEndpoint") as String) + "?wstoken=" + (config.get("xatkit.moodle.accessToken") as String), 
+		Integer.parseInt(context.get("moodle").get("username") as String),
+		"Sorry I'll have to check that on my dictionary and get back to you later :("
+	)
