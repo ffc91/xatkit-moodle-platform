@@ -18,10 +18,10 @@ import java.io.InputStreamReader;
 /**
  * A {@link RuntimeMessageAction} that posts a {@code message} to a given xatkit-moodle {@code channel}.
  */
-public class PostMessage extends RestGetAction<MoodlePlatform> {
+public class GetCourses extends RestGetAction<MoodlePlatform> {
 
     /**
-     * Constructs a new {@link PostMessage} with the provided {@code runtimePlatform}, {@code session}...
+     * Constructs a new {@link PostMessage2} with the provided {@code runtimePlatform}, {@code session}...
      *
      * @param runtimePlatform the {@link MoodlePlatform} containing this action
      * @param session         the {@link XatkitSession} associated to this action
@@ -29,11 +29,10 @@ public class PostMessage extends RestGetAction<MoodlePlatform> {
      * @throws IllegalArgumentException if the provided {@code message} or {@code channel} is {@code null}
      */
     @SuppressWarnings("serial")
-	public PostMessage(MoodlePlatform runtimePlatform, XatkitSession session, String moodleEndpoint, Integer toUserId, String message) {
-        super(runtimePlatform, session, Collections.emptyMap(), moodleEndpoint + "&wsfunction=core_message_send_instant_messages", 
+	public GetCourses(MoodlePlatform runtimePlatform, XatkitSession session, String moodleEndpoint, Integer fromUserId) {
+        super(runtimePlatform, session, Collections.emptyMap(), moodleEndpoint + "&wsfunction=core_enrol_get_users_courses", 
                 new HashMap<String,Object>() {{
-                    put("messages[0][touserid]", Integer.valueOf(toUserId));
-                    put("messages[0][text]", message);  
+                    put("userid", Integer.valueOf(fromUserId));
                 }});
     }
 
@@ -60,6 +59,6 @@ public class PostMessage extends RestGetAction<MoodlePlatform> {
 		}
 		// print out the json response
 		System.out.println(jsonSb.toString());
-    	return null;
+    	return line;
     }    
 }
