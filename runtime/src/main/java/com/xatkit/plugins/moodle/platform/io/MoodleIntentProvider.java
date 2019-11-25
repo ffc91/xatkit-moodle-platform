@@ -36,9 +36,9 @@ public class MoodleIntentProvider extends ChatIntentProvider<MoodlePlatform> {
                         Log.info("Received message {0}", messageObject.getMessage());
                         Log.info("Received username {0}", messageObject.getUsername());
                         String username = messageObject.getUsername();
-                        String channel = socketIOClient.getSessionId().toString();
+                        //String channel = socketIOClient.getSessionId().toString();
                         String rawMessage = messageObject.getMessage();
-                        XatkitSession session = this.getRuntimePlatform().createSessionFromChannel(channel);
+                        XatkitSession session = this.getRuntimePlatform().createSessionFromChannel(username);//(channel);
                         RecognizedIntent recognizedIntent = IntentRecognitionHelper.getRecognizedIntent(rawMessage,
                                 session, this.getRuntimePlatform().getXatkitCore());
                     	session.getRuntimeContexts().setContextValue(MoodleUtils.MOODLE_CONTEXT_KEY, 1,
@@ -49,7 +49,7 @@ public class MoodleIntentProvider extends ChatIntentProvider<MoodlePlatform> {
                         session.getRuntimeContexts().setContextValue(ChatUtils.CHAT_CONTEXT_KEY, 1,
                                 ChatUtils.CHAT_USERNAME_CONTEXT_KEY, username);
                         session.getRuntimeContexts().setContextValue(ChatUtils.CHAT_CONTEXT_KEY, 1,
-                                ChatUtils.CHAT_CHANNEL_CONTEXT_KEY, channel);
+                                ChatUtils.CHAT_CHANNEL_CONTEXT_KEY, username);//channel);
                         session.getRuntimeContexts().setContextValue(ChatUtils.CHAT_CONTEXT_KEY, 1,
                                 ChatUtils.CHAT_RAW_MESSAGE_CONTEXT_KEY, rawMessage);
                         

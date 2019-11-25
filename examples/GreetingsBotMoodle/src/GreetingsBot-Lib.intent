@@ -9,6 +9,13 @@ intent MyCourses{
 	}
 }
 
+intent SpecifyCourse follows MyCourses {
+	inputs {
+		"Details please"
+	}
+	
+}
+
 intent Agent_Boring{
 	inputs {
 		"you are boring me"

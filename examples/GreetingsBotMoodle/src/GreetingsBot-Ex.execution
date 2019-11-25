@@ -15,7 +15,15 @@ on intent MyCourses do
 	MoodlePlatform.PostMessage(
 		(config.get("xatkit.moodle.restApiEndpoint") as String) + "?wstoken=" + (config.get("xatkit.moodle.accessToken") as String), 
 		Integer.parseInt((context.get("moodle").get("username") as String)),
-		courses
+		"These are the courses you are enrolled:<br>" + courses + "<p>Select by number to see details</p>"
+	)
+	
+on intent SpecifyCourse do
+	
+	MoodlePlatform.PostMessage(
+		(config.get("xatkit.moodle.restApiEndpoint") as String) + "?wstoken=" + (config.get("xatkit.moodle.accessToken") as String), 
+		Integer.parseInt((context.get("moodle").get("username") as String)),
+		"There's no information currently available"
 	)
 
 on intent Agent_Boring do
