@@ -37,9 +37,9 @@ public class MessageObject {
      * @param message  the message
      * @param username the name of the user sending the message
      */
-    public MessageObject(String message, String username) {
+    public MessageObject(String message, String userId) {
         this.message = message;
-        this.userId = username;
+        this.userId = userId;
     }
 
     /**

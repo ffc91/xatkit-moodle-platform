@@ -35,25 +35,24 @@ public class MoodleIntentProvider extends ChatIntentProvider<MoodlePlatform> {
                 (socketIOClient, messageObject, ackRequest)-> {
                         Log.info("Received message: {0}", messageObject.getMessage());
                         Log.info("Received userId: {0}", messageObject.getUserId());
-                        String username = messageObject.getUserId();
+                        String userId = messageObject.getUserId();
                         String rawMessage = messageObject.getMessage();
-                        XatkitSession session = this.getRuntimePlatform().createSessionFromUserId(username);
+                        XatkitSession session = this.getRuntimePlatform().createSessionFromUserId(userId);
                         RecognizedIntent recognizedIntent = IntentRecognitionHelper.getRecognizedIntent(rawMessage,
                                 session, this.getRuntimePlatform().getXatkitCore());
                     	session.getRuntimeContexts().setContextValue(MoodleUtils.MOODLE_CONTEXT_KEY, 1,
-                                MoodleUtils.CHAT_USERNAME_CONTEXT_KEY, username);
+                                MoodleUtils.CHAT_USERNAME_CONTEXT_KEY, userId);
                         session.getRuntimeContexts().setContextValue(MoodleUtils.MOODLE_CONTEXT_KEY, 1,
                                 MoodleUtils.CHAT_RAW_MESSAGE_CONTEXT_KEY, rawMessage);
                         
                         session.getRuntimeContexts().setContextValue(ChatUtils.CHAT_CONTEXT_KEY, 1,
-                                ChatUtils.CHAT_USERNAME_CONTEXT_KEY, username);
+                                ChatUtils.CHAT_USERNAME_CONTEXT_KEY, userId);
                         session.getRuntimeContexts().setContextValue(ChatUtils.CHAT_CONTEXT_KEY, 1,
-                                ChatUtils.CHAT_CHANNEL_CONTEXT_KEY, username);//channel);
+                                ChatUtils.CHAT_CHANNEL_CONTEXT_KEY, userId);//channel);
                         session.getRuntimeContexts().setContextValue(ChatUtils.CHAT_CONTEXT_KEY, 1,
                                 ChatUtils.CHAT_RAW_MESSAGE_CONTEXT_KEY, rawMessage);
                         
                         this.sendEventInstance(recognizedIntent, session);
-   
                 });
     }
 
