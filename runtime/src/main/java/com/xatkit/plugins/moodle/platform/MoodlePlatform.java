@@ -98,11 +98,11 @@ public class MoodlePlatform extends ChatPlatform {
      * <p>
      * This method ensures that the same {@link XatkitSession} is returned for the same {@code channel}.
      *
-     * @param channel the channel to create a {@link XatkitSession} from
+     * @param userId the channel to create a {@link XatkitSession} from
      * @return the created {@link XatkitSession}
     */
-    public XatkitSession createSessionFromChannel(String channel) {
-        return this.xatkitCore.getOrCreateXatkitSession(channel);
+    public XatkitSession createSessionFromUserId(String userId) {
+        return this.xatkitCore.getOrCreateXatkitSession(userId);
     }
    
 }

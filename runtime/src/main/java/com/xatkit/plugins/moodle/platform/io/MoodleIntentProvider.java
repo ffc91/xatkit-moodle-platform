@@ -33,12 +33,11 @@ public class MoodleIntentProvider extends ChatIntentProvider<MoodlePlatform> {
         super(runtimePlatform, configuration);
         this.runtimePlatform.getSocketIOServer().addEventListener(SocketEventTypes.USER_MESSAGE.label, MessageObject.class, 
                 (socketIOClient, messageObject, ackRequest)-> {
-                        Log.info("Received message {0}", messageObject.getMessage());
-                        Log.info("Received username {0}", messageObject.getUsername());
-                        String username = messageObject.getUsername();
-                        //String channel = socketIOClient.getSessionId().toString();
+                        Log.info("Received message: {0}", messageObject.getMessage());
+                        Log.info("Received userId: {0}", messageObject.getUserId());
+                        String username = messageObject.getUserId();
                         String rawMessage = messageObject.getMessage();
-                        XatkitSession session = this.getRuntimePlatform().createSessionFromChannel(username);//(channel);
+                        XatkitSession session = this.getRuntimePlatform().createSessionFromUserId(username);
                         RecognizedIntent recognizedIntent = IntentRecognitionHelper.getRecognizedIntent(rawMessage,
                                 session, this.getRuntimePlatform().getXatkitCore());
                     	session.getRuntimeContexts().setContextValue(MoodleUtils.MOODLE_CONTEXT_KEY, 1,

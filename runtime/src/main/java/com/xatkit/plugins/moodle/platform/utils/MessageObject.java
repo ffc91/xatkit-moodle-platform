@@ -18,7 +18,7 @@ public class MessageObject {
     /**
      * The name of the user who sent the message.
      */
-    private String username;
+    private String userId;
 
     /**
      * Constructs an empty {@link MessageObject}.
@@ -39,7 +39,7 @@ public class MessageObject {
      */
     public MessageObject(String message, String username) {
         this.message = message;
-        this.username = username;
+        this.userId = username;
     }
 
     /**
@@ -54,10 +54,10 @@ public class MessageObject {
     /**
      * Sets the username with the provided {@code username}.
      *
-     * @param username the username to set
+     * @param userId the username to set
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     /**
@@ -74,7 +74,7 @@ public class MessageObject {
      *
      * @return the name of the user sending the message
      */
-    public String getUsername() {
-        return this.username;
+    public String getUserId() {
+        return this.userId;
     }
 }
