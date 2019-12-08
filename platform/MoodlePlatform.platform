@@ -15,7 +15,7 @@ providers {
 }
 
 actions {
-	GetCourses(restApiEndpoint	: String, fromUserId : Integer)
-	PostMessage(restApiEndpoint	: String, toUserId : Integer, message : String)
-	Reply(message : String)
+	GetCourses(moodleEndpoint	: String, fromUserId : Integer)
+	PostMessage(moodleEndpoint	: String, toUserId : Integer, message : String)
+	Reply(moodleEndpoint	: String, message : String)
 }
