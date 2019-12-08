@@ -48,7 +48,7 @@ public class MoodleIntentProvider extends ChatIntentProvider<MoodlePlatform> {
                         session.getRuntimeContexts().setContextValue(ChatUtils.CHAT_CONTEXT_KEY, 1,
                                 ChatUtils.CHAT_USERNAME_CONTEXT_KEY, userId);
                         session.getRuntimeContexts().setContextValue(ChatUtils.CHAT_CONTEXT_KEY, 1,
-                                ChatUtils.CHAT_CHANNEL_CONTEXT_KEY, userId);//channel);
+                                ChatUtils.CHAT_CHANNEL_CONTEXT_KEY, userId);
                         session.getRuntimeContexts().setContextValue(ChatUtils.CHAT_CONTEXT_KEY, 1,
                                 ChatUtils.CHAT_RAW_MESSAGE_CONTEXT_KEY, rawMessage);
                         
