@@ -17,5 +17,5 @@ providers {
 actions {
 	GetCourses(moodleEndpoint	: String, fromUserId : Integer)
 	PostMessage(moodleEndpoint	: String, toUserId : Integer, message : String)
-	Reply(message : String)
+	Reply(moodleEndpoint	: String, message : String)
 }
