@@ -12,20 +12,14 @@ import fr.inria.atlanmod.commons.log.Log;
 import org.apache.commons.configuration2.Configuration;
 
 /**
- * A {@link ChatPlatform} class that interacts with the
- * <a href="https://github.com/xatkit-bot-platform/xatkit-react">Xatkit React component</a>.
- * <p>
- * This platform creates a server that accepts socket connexions from the client application. Messages are received
- * in real-time, and replies are sent to the client using a push mechanism.
+ * This platform creates a server that accepts socket connexions from the moodle application. Messages are received
+ * in real-time, and replies are sent to the client using moodle's API.
  * <p>
  * This platform provides the following actions:
  * <ul>
- * <li>{@link Reply}: replies to a user input</li>
- * <li>{@link PostMessage}: post a message to a given channel (i.e. window running a xatkit-react instance)</li>
+ * <li>{@link PostMessage}: post a message to a given channel (i.e. moodle user)</li>
+ * <li>{@link GetCourses}: retrieves the courses in which a user is registered.</li>
  * </ul>
- * <p>
- * This class is part of xatkit's core paltform, and can be used in an execution model by importing the
- * <i>ReactPlatform</i> package.
  */
 public class MoodlePlatform extends ChatPlatform {
 
@@ -35,7 +29,7 @@ public class MoodlePlatform extends ChatPlatform {
     private SocketIOServer socketIOServer;
 
     /**
-     * Constructs a new {@link ReactPlatform} from the provided {@link XatkitCore} and {@link Configuration}.
+     * Constructs a new {@link MoodlePlatform} from the provided {@link XatkitCore} and {@link Configuration}.
      * <p>
      * This constructor initializes the underlying socket server using the port specified in the provided
      * {@link Configuration}.
@@ -58,7 +52,6 @@ public class MoodlePlatform extends ChatPlatform {
         /*
          * TODO Doesn't seem to be needed for the moment, needs to be tested when deployed on a server.
          */
-//        socketioConfiguration.setHostname("localhost");
         socketioConfiguration.setPort(socketServerPort);
         /*
          * The URL where the chatbox is displayed. Setting this is required to avoid CORS issues.
@@ -71,8 +64,8 @@ public class MoodlePlatform extends ChatPlatform {
          */
         socketioConfiguration.setRandomSession(true);
         socketIOServer = new SocketIOServer(socketioConfiguration);
-        socketIOServer.addConnectListener(socketIOClient -> Log.info("Moodle Connected"));
-        socketIOServer.addDisconnectListener(socketIOClient -> Log.info("Moodle Disconnected"));
+        socketIOServer.addConnectListener(socketIOClient -> Log.info("Moodle Chat User Connected"));
+        socketIOServer.addDisconnectListener(socketIOClient -> Log.info("Moodle Chat User Disconnected"));
         this.socketIOServer.startAsync();
     }
 

@@ -16,7 +16,7 @@ public class MessageObject {
     private String message;
 
     /**
-     * The name of the user who sent the message.
+     * The id of the user who sent the message.
      */
     private String userId;
 
@@ -35,7 +35,7 @@ public class MessageObject {
      * are automatically parsed by Jackson and reified into {@link MessageObject}s using the default constructor.
      *
      * @param message  the message
-     * @param username the name of the user sending the message
+     * @param userId the id of the user sending the message
      */
     public MessageObject(String message, String userId) {
         this.message = message;
@@ -54,7 +54,7 @@ public class MessageObject {
     /**
      * Sets the username with the provided {@code username}.
      *
-     * @param userId the username to set
+     * @param userId the id to set
      */
     public void setUserId(String userId) {
         this.userId = userId;
@@ -70,9 +70,9 @@ public class MessageObject {
     }
 
     /**
-     * Returns the name of the user sending the message.
+     * Returns the id of the user sending the message.
      *
-     * @return the name of the user sending the message
+     * @return the id of the user sending the message
      */
     public String getUserId() {
         return this.userId;

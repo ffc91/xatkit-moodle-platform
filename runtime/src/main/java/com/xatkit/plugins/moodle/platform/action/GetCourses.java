@@ -2,7 +2,6 @@ package com.xatkit.plugins.moodle.platform.action;
 
 import com.mashape.unirest.http.Headers;
 import com.xatkit.core.platform.action.RestGetAction;
-import com.xatkit.core.platform.action.RuntimeMessageAction;
 import com.xatkit.core.session.XatkitSession;
 import com.xatkit.plugins.moodle.platform.MoodlePlatform;
 
@@ -30,79 +29,85 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 
 /**
- * A {@link RuntimeMessageAction} that posts a {@code message} to a given xatkit-moodle {@code channel}.
+ * A {@link RestGetAction} that retrieves the courses in which the user with id {@code fromUserId} is registered.
  */
 public class GetCourses extends RestGetAction<MoodlePlatform> {
 
     /**
-     * Constructs a new {@link PostMessage2} with the provided {@code runtimePlatform}, {@code session}...
+     * Constructs a new {@link GetCourses} with the provided {@code runtimePlatform}, {@code session}, {@code
+     * moodleEndpoint}, {@code userId}
      *
      * @param runtimePlatform the {@link MoodlePlatform} containing this action
      * @param session         the {@link XatkitSession} associated to this action
+     * @param moodleEndpoint  the endpoint of the moodle instance
+     * @param fromUserId      the moodle user id to get the registered courses
      * @throws NullPointerException     if the provided {@code runtimePlatform} or {@code session} is {@code null}
      * @throws IllegalArgumentException if the provided {@code message} or {@code channel} is {@code null}
      */
-    @SuppressWarnings("serial")
-	public GetCourses(MoodlePlatform runtimePlatform, XatkitSession session, String moodleEndpoint, Integer fromUserId) {
-        super(runtimePlatform, session, Collections.emptyMap(), moodleEndpoint + "&wsfunction=core_enrol_get_users_courses", 
-                new HashMap<String,Object>() {{
-                    put("userid", Integer.valueOf(fromUserId));
-                }});
+    public GetCourses(MoodlePlatform runtimePlatform, XatkitSession session, String moodleEndpoint,
+            Integer fromUserId) {
+        super(runtimePlatform, session, Collections.emptyMap(),
+                moodleEndpoint + "&wsfunction=core_enrol_get_users_courses", new HashMap<String, Object>() {
+                    {
+                        put("userid", Integer.valueOf(fromUserId));
+                    }
+                });
     }
 
-
+    /**
+     * Handles the REST API response and computes the action's results
+     * <p>
+     *
+     * @param headers the {@link Headers} returned by the REST API
+     * @param status  the status code returned by the REST API
+     * @param body    the {@link InputStream} containing the response body
+     * @return the action's result
+     */
     protected Object handleResponse(Headers headers, int status, InputStream body) {
-    	String resultado = "";
-    	BufferedReader reader = new BufferedReader(new InputStreamReader(body));
-    	StringBuilder xml = new StringBuilder();
-		String line = null;
-		try {
-			while ((line = reader.readLine()) != null) {
-				xml.append(line);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			// Clean up
-			if (reader != null) {
-				try {
-					reader.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		try {
-			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(new StringReader(xml.toString())));
-			
-			NodeList errNodes = doc.getElementsByTagName("error");
-			if (errNodes.getLength() > 0) {
-				Element err = (Element)errNodes.item(0);
-				System.out.println(err.getElementsByTagName("errorMessage").item(0).getTextContent());
-			} else { 
-				
-			}
-			
-			XPathFactory xPathfactory = XPathFactory.newInstance();
-			XPath xpath = xPathfactory.newXPath();
-			XPathExpression expr = xpath.compile("//KEY[@name=\"fullname\"]");
-			NodeList nl = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-			
-			System.out.println("******************************"+nl.item(0).getTextContent()+"****************************************");
-			
-			for(int i=0;nl.getLength()>i; i++) {
-				resultado += (i+1) + " - " + nl.item(i).getTextContent() + "<br>";
-			}
-			
-	    } catch (SAXException | IOException | ParserConfigurationException | XPathExpressionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		// print out the xml response
-		System.out.println(xml.toString());
-    	return resultado;
-    }    
+        String result = "";
+        BufferedReader reader = new BufferedReader(new InputStreamReader(body));
+        StringBuilder xml = new StringBuilder();
+        String line = null;
+        try {
+            while ((line = reader.readLine()) != null) {
+                xml.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            // Clean up
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        try {
+            Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+                    .parse(new InputSource(new StringReader(xml.toString())));
+
+            NodeList errNodes = doc.getElementsByTagName("error");
+            if (errNodes.getLength() > 0) {
+                Element err = (Element) errNodes.item(0);
+                System.out.println(err.getElementsByTagName("errorMessage").item(0).getTextContent());
+            }
+
+            XPathFactory xPathfactory = XPathFactory.newInstance();
+            XPath xpath = xPathfactory.newXPath();
+            XPathExpression expr = xpath.compile("//KEY[@name=\"fullname\"]");
+            NodeList nl = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+
+            for (int i = 0; nl.getLength() > i; i++) {
+                result += (i + 1) + " - " + nl.item(i).getTextContent() + "<br>";
+            }
+
+        } catch (SAXException | IOException | ParserConfigurationException | XPathExpressionException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return result;
+    }
 }
