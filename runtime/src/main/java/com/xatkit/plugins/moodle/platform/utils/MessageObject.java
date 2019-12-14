@@ -21,6 +21,11 @@ public class MessageObject {
     private String userId;
 
     /**
+     * The Moodle course ID from where the user was when sneding the message.
+     */
+    private String currentCourseID;
+
+    /**
      * Constructs an empty {@link MessageObject}.
      * <p>
      * The default constructor is required by Jackson (initialization is done through the setters).
@@ -34,8 +39,8 @@ public class MessageObject {
      * This constructor is typically called to create {@link MessageObject}s to send to the client. Received messages
      * are automatically parsed by Jackson and reified into {@link MessageObject}s using the default constructor.
      *
-     * @param message  the message
-     * @param userId the id of the user sending the message
+     * @param message the message
+     * @param userId  the id of the user sending the message
      */
     public MessageObject(String message, String userId) {
         this.message = message;
@@ -61,6 +66,15 @@ public class MessageObject {
     }
 
     /**
+     * Sets the Moodle course ID from where the user was when sneding the message.
+     * 
+     * @param currentCourseID to set
+     */
+    public void setCurrentCourseAccessID(String currentCourseID) {
+        this.currentCourseID = currentCourseID;
+    }
+
+    /**
      * Returns the message.
      *
      * @return the message
@@ -77,4 +91,14 @@ public class MessageObject {
     public String getUserId() {
         return this.userId;
     }
+
+    /**
+     * Returns the Moodle course ID from where the user was when sneding the message.
+     * 
+     * @return the currentCourseID
+     */
+    public String getCurrentCourseID() {
+        return currentCourseID;
+    }
+
 }
