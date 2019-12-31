@@ -39,4 +39,8 @@ public interface MoodleUtils extends ChatUtils {
      * The {@link RuntimeContexts} key used to store Moodle-related information.
      */
     String MOODLE_CONTEXT_KEY = "moodle";
+    /**
+     * The {@link RuntimeContexts} key used to store Moodle-session information.
+     */
+    String MOODLE_CHAT_COURSEID_CONTEXT_KEY = "currentCourseID";
 }

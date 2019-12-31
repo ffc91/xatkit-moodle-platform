@@ -16,9 +16,14 @@ public class MessageObject {
     private String message;
 
     /**
-     * The name of the user who sent the message.
+     * The id of the user who sent the message.
      */
-    private String username;
+    private String userId;
+
+    /**
+     * The Moodle course ID from where the user was when sneding the message.
+     */
+    private String currentCourseID;
 
     /**
      * Constructs an empty {@link MessageObject}.
@@ -34,12 +39,12 @@ public class MessageObject {
      * This constructor is typically called to create {@link MessageObject}s to send to the client. Received messages
      * are automatically parsed by Jackson and reified into {@link MessageObject}s using the default constructor.
      *
-     * @param message  the message
-     * @param username the name of the user sending the message
+     * @param message the message
+     * @param userId  the id of the user sending the message
      */
-    public MessageObject(String message, String username) {
+    public MessageObject(String message, String userId) {
         this.message = message;
-        this.username = username;
+        this.userId = userId;
     }
 
     /**
@@ -54,10 +59,19 @@ public class MessageObject {
     /**
      * Sets the username with the provided {@code username}.
      *
-     * @param username the username to set
+     * @param userId the id to set
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    /**
+     * Sets the Moodle course ID from where the user was when sneding the message.
+     * 
+     * @param currentCourseID to set
+     */
+    public void setCurrentCourseAccessID(String currentCourseID) {
+        this.currentCourseID = currentCourseID;
     }
 
     /**
@@ -70,11 +84,21 @@ public class MessageObject {
     }
 
     /**
-     * Returns the name of the user sending the message.
+     * Returns the id of the user sending the message.
      *
-     * @return the name of the user sending the message
+     * @return the id of the user sending the message
      */
-    public String getUsername() {
-        return this.username;
+    public String getUserId() {
+        return this.userId;
     }
+
+    /**
+     * Returns the Moodle course ID from where the user was when sneding the message.
+     * 
+     * @return the currentCourseID
+     */
+    public String getCurrentCourseID() {
+        return currentCourseID;
+    }
+
 }

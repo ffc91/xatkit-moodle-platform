@@ -11,6 +11,8 @@ import com.xatkit.plugins.moodle.platform.utils.MoodleUtils;
 import com.xatkit.plugins.moodle.platform.utils.SocketEventTypes;
 
 import fr.inria.atlanmod.commons.log.Log;
+
+
 import org.apache.commons.configuration2.Configuration;
 
 /**
@@ -33,28 +35,32 @@ public class MoodleIntentProvider extends ChatIntentProvider<MoodlePlatform> {
         super(runtimePlatform, configuration);
         this.runtimePlatform.getSocketIOServer().addEventListener(SocketEventTypes.USER_MESSAGE.label, MessageObject.class, 
                 (socketIOClient, messageObject, ackRequest)-> {
-                        Log.info("Received message {0}", messageObject.getMessage());
-                        Log.info("Received username {0}", messageObject.getUsername());
-                        String username = messageObject.getUsername();
-                        String channel = socketIOClient.getSessionId().toString();
+                        Log.info("Received message: {0}\n", messageObject.getMessage());
+                        Log.info("Received userId: {0}\n", messageObject.getUserId());
+                        Log.info("Received currentCourseID: {0}\n", messageObject.getCurrentCourseID());
+                        String userId = messageObject.getUserId();
+                        String currentCourseID = messageObject.getCurrentCourseID();
                         String rawMessage = messageObject.getMessage();
-                        XatkitSession session = this.getRuntimePlatform().createSessionFromChannel(channel);
+                        XatkitSession session = this.getRuntimePlatform().createSessionFromUserId(userId);
                         RecognizedIntent recognizedIntent = IntentRecognitionHelper.getRecognizedIntent(rawMessage,
                                 session, this.getRuntimePlatform().getXatkitCore());
                     	session.getRuntimeContexts().setContextValue(MoodleUtils.MOODLE_CONTEXT_KEY, 1,
-                                MoodleUtils.CHAT_USERNAME_CONTEXT_KEY, username);
-                        session.getRuntimeContexts().setContextValue(MoodleUtils.MOODLE_CONTEXT_KEY, 1,
+                                MoodleUtils.CHAT_USERNAME_CONTEXT_KEY, userId);
+                    	session.getRuntimeContexts().setContextValue(MoodleUtils.MOODLE_CONTEXT_KEY, 1,
+                    			MoodleUtils.CHAT_CHANNEL_CONTEXT_KEY, userId);
+                    	session.getRuntimeContexts().setContextValue(MoodleUtils.MOODLE_CONTEXT_KEY, 1,
                                 MoodleUtils.CHAT_RAW_MESSAGE_CONTEXT_KEY, rawMessage);
+                        session.getRuntimeContexts().setContextValue(MoodleUtils.MOODLE_CONTEXT_KEY,1,
+                        		MoodleUtils.MOODLE_CHAT_COURSEID_CONTEXT_KEY,currentCourseID);
                         
                         session.getRuntimeContexts().setContextValue(ChatUtils.CHAT_CONTEXT_KEY, 1,
-                                ChatUtils.CHAT_USERNAME_CONTEXT_KEY, username);
+                                ChatUtils.CHAT_USERNAME_CONTEXT_KEY, userId);
                         session.getRuntimeContexts().setContextValue(ChatUtils.CHAT_CONTEXT_KEY, 1,
-                                ChatUtils.CHAT_CHANNEL_CONTEXT_KEY, channel);
+                                ChatUtils.CHAT_CHANNEL_CONTEXT_KEY, userId);
                         session.getRuntimeContexts().setContextValue(ChatUtils.CHAT_CONTEXT_KEY, 1,
                                 ChatUtils.CHAT_RAW_MESSAGE_CONTEXT_KEY, rawMessage);
                         
                         this.sendEventInstance(recognizedIntent, session);
-   
                 });
     }
 
@@ -64,4 +70,5 @@ public class MoodleIntentProvider extends ChatIntentProvider<MoodlePlatform> {
          * Do nothing the socket server is started asynchronously.
          */
     }
+   
 }
